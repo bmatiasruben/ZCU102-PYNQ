@@ -104,10 +104,10 @@ fi
 
 tar -xf pynq_binaries.tar.gz
 
-cp -r /tmp/pynq-v2.7-binaries/gcc-mb/microblazeel-xilinx-elf /usr/local/share/pynq-venv/bin/
+cp -r /tmp/pynq-v3.0-binaries/gcc-mb/microblazeel-xilinx-elf /usr/local/share/pynq-venv/bin/
 echo "export PATH=\$PATH:/usr/local/share/pynq-venv/bin/microblazeel-xilinx-elf/bin/" >> /etc/profile.d/pynq_venv.sh
 
-cp pynq-v2.7-binaries/xrt/xclbinutil /usr/local/share/pynq-venv/bin/
+cp pynq-3.0-binaries/xrt/xclbinutil /usr/local/share/pynq-venv/bin/
 chmod +x /usr/local/share/pynq-venv/bin/xclbinutil
 popd
 
