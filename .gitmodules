@@ -2,3 +2,4 @@
 	path = pynq
 	url = https://github.com/Xilinx/PYNQ.git
 	shallow = true
+	branch = image_v3.0
