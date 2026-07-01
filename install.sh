@@ -31,7 +31,7 @@ then
   git submodule init && git submodule update
 else
   rm -rf pynq/
-  git clone https://github.com/Xilinx/PYNQ.git -b image_v2.7 --depth 1 pynq
+  git clone https://github.com/Xilinx/PYNQ.git -b image_v3.0 --depth 1 pynq
 fi
 
 
@@ -53,12 +53,12 @@ done
 # apt update 
 
 apt-get -o DPkg::Lock::Timeout=10 update && \
-apt-get install -y python3.8-venv python3-cffi libssl-dev libcurl4-openssl-dev \
+apt-get install -y python3.10-venv python3-cffi libssl-dev libcurl4-openssl-dev \
   portaudio19-dev libcairo2-dev libdrm-dev libopencv-dev python3-opencv graphviz i2c-tools \
   fswebcam
 
 # Install PYNQ Virtual Environment 
-pushd pynq/sdbuild/packages/python_packages_focal
+pushd pynq/sdbuild/packages/python_packages_jammy
 mkdir -p $PYNQ_VENV
 cat > $PYNQ_VENV/pip.conf <<EOT
 [install]
@@ -96,7 +96,7 @@ python -m pip install pynq
 
 # Get PYNQ Binaries (ublaze compiler and xclbinutils
 pushd /tmp
-wget https://bit.ly/pynq_binaries_2_7 -O pynq_binaries.tar.gz
+wget https://www.xilinx.com/bin/public/openDownload?filename=pynq-v3.0-binaries.tar.gz -O pynq_binaries.tar.gz
 if [ $(file --mime-type -b pynq_binaries.tar.gz) != "application/gzip" ]; then
   echo -e "${RED}Could not download pynq binaries, server may be down${NC}\n"
   exit
@@ -174,7 +174,7 @@ systemctl enable pl_server
 
 
 # Patch microblaze to use virtualenv libraries
-sed -i "s/opt\/microblaze/usr\/local\/share\/pynq-venv\/bin/g" /usr/local/share/pynq-venv/lib/python3.8/site-packages/pynq/lib/pynqmicroblaze/rpc.py
+sed -i "s/opt\/microblaze/usr\/local\/share\/pynq-venv\/bin/g" /usr/local/share/pynq-venv/lib/python3.10/site-packages/pynq/lib/pynqmicroblaze/rpc.py
 
 # Remove unnecessary notebooks
 # rm -rf $PYNQ_JUPYTER_NOTEBOOKS/pynq_peripherals/app* $PYNQ_JUPYTER_NOTEBOOKS/pynq_peripherals/grove_joystick
